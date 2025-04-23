@@ -11,4 +11,15 @@
     { "src": "/api/.*", "dest": "/api/$1" },
     { "src": "/.*", "dest": "/index.js" }
   ]
+
+
+  {
+  "functions": {
+    "api/webhook.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  }
+}
+
 }
