@@ -1,42 +1,57 @@
+// pages/index.js
+import { useState } from 'react';
+
 export default function Home() {
+  const [trackingNumber, setTrackingNumber] = useState('');
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setResult(null);
+
+    if (!trackingNumber.trim()) {
+      setError('Please enter a tracking number');
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/track?tracking_number=${trackingNumber}`);
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      setResult(data);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-      <h1 className="text-3xl font-bold mb-6">Tracking Bot</h1>
-      <form
-        className="w-full max-w-sm"
-        onSubmit={async (e) => {
-          e.preventDefault();
-          const trackingNumber = e.target.elements.trackingNumber.value;
-          const courierCode = e.target.elements.courierCode.value;
-          const response = await fetch('/api/track', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ trackingNumber, courierCode })
-          });
-          const result = await response.json();
-          alert(JSON.stringify(result, null, 2));
-        }}
-      >
+    <div className="min-h-screen p-4">
+      <h1 className="text-2xl font-bold mb-4">📦 Track Your Package</h1>
+      <form onSubmit={handleSubmit} className="mb-4">
         <input
           type="text"
-          name="trackingNumber"
-          placeholder="Tracking Number"
-          className="p-2 mb-2 w-full border rounded"
-          required
+          placeholder="Enter tracking number"
+          value={trackingNumber}
+          onChange={(e) => setTrackingNumber(e.target.value)}
+          className="border px-4 py-2 rounded w-full max-w-md"
         />
-        <input
-          type="text"
-          name="courierCode"
-          placeholder="Courier Code (or leave blank for auto)"
-          className="p-2 mb-2 w-full border rounded"
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-        >
+        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded mt-2">
           Track
         </button>
       </form>
+
+      {error && <p className="text-red-500">{error}</p>}
+      {result && (
+        <pre className="bg-gray-100 p-4 rounded max-w-xl overflow-auto">
+          {JSON.stringify(result, null, 2)}
+        </pre>
+      )}
     </div>
   );
 }
