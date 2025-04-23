@@ -13,6 +13,7 @@
   ]
 
 
+
   
   "functions": {
     "api/webhook.js": {
@@ -20,6 +21,6 @@
       "maxDuration": 10
     }
   }
-}
 
+}
 
