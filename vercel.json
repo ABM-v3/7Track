@@ -2,7 +2,7 @@
   "version": 2,
   "env": {
     "TRACKINGMORE_API_KEY": "bfk6iqku-hmyw-vfty-uqfl-81is6ftk9spo",
-    "TELEGRAM_BOT_TOKEN": "your_telegram_bot_token_here"
+    "TELEGRAM_BOT_TOKEN": "7827167607:AAH67veOWXZvlKo8EriBvgfqWLRneQl0Fcs"
   },
   "builds": [
     { "src": "next.config.js", "use": "@vercel/next" }
