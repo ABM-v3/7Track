@@ -1,27 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "next.config.js",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/track",
-      "dest": "/api/track.js"
-    },
-    {
-      "src": "/api/webhook",
-      "dest": "/api/webhook.js"
-    }
-  ],
   "functions": {
-    "api/webhook.js": {
+    "api/track.js": {
       "memory": 128,
       "maxDuration": 10
     },
-    "api/track.js": {
+    "api/webhook.js": {
       "memory": 128,
       "maxDuration": 10
     }
