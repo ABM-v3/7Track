@@ -1,26 +1,29 @@
 {
   "version": 2,
-  "env": {
-    "TRACKINGMORE_API_KEY": "bfk6iqku-hmyw-vfty-uqfl-81is6ftk9spo",
-    "TELEGRAM_BOT_TOKEN": "7827167607:AAH67veOWXZvlKo8EriBvgfqWLRneQl0Fcs"
-  },
   "builds": [
-    { "src": "next.config.js", "use": "@vercel/next" }
+    {
+      "src": "next.config.js",
+      "use": "@vercel/next"
+    }
   ],
   "routes": [
-    { "src": "/api/.*", "dest": "/api/$1" },
-    { "src": "/.*", "dest": "/index.js" }
-  ]
-
-
-
-  
+    {
+      "src": "/api/track",
+      "dest": "/api/track.js"
+    },
+    {
+      "src": "/api/webhook",
+      "dest": "/api/webhook.js"
+    }
+  ],
   "functions": {
     "api/webhook.js": {
       "memory": 128,
       "maxDuration": 10
+    },
+    "api/track.js": {
+      "memory": 128,
+      "maxDuration": 10
     }
   }
-
 }
-
