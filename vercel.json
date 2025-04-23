@@ -13,7 +13,7 @@
   ]
 
 
-  {
+  
   "functions": {
     "api/webhook.js": {
       "memory": 128,
@@ -22,4 +22,4 @@
   }
 }
 
-}
+
