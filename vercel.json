@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "env": {
+    "TRACKINGMORE_API_KEY": "bfk6iqku-hmyw-vfty-uqfl-81is6ftk9spo",
+    "TELEGRAM_BOT_TOKEN": "your_telegram_bot_token_here"
+  },
+  "builds": [
+    { "src": "next.config.js", "use": "@vercel/next" }
+  ],
+  "routes": [
+    { "src": "/api/.*", "dest": "/api/$1" },
+    { "src": "/.*", "dest": "/index.js" }
+  ]
+}
